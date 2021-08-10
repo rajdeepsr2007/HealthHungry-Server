@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 module.exports.signUp = async (req , res) => {
     try{
-        const { email , username , password } = req.body;
+        const { email , username , password , image } = req.body;
         let user = await User.findOne({ email });
         if( user ){
             res.status(422).json({
@@ -18,7 +18,7 @@ module.exports.signUp = async (req , res) => {
                 return;
             }else{
                 const user = User.create({
-                    email , password , username
+                    email , password , username , image
                 });
                 res.status(200).json({
                     message : 'You were successfully signed up'
@@ -85,7 +85,8 @@ module.exports.googleSignIn = async (req , res) => {
         }else{
             user = await User.create({
                 username ,
-                email
+                email ,
+                image
             })
             return res.status(200).json({
                 message : 'Google SignIn'
