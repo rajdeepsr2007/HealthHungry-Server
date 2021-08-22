@@ -80,7 +80,8 @@ module.exports.googleSignIn = async (req , res) => {
         let user = await User.findOne({ email : email });
         if( user ){
             return res.status(200).json({
-                message : 'Google SignIn'
+                message : 'Google SignIn',
+                user
             })
         }else{
             user = await User.create({
@@ -89,7 +90,8 @@ module.exports.googleSignIn = async (req , res) => {
                 image
             })
             return res.status(200).json({
-                message : 'Google SignIn'
+                message : 'Google SignIn',
+                user
             })
         }
     }catch(error){
